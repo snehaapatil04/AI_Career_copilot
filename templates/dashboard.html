@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="career-dashboard">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div class="dashboard-header">
+
+        <div>
+            <span class="eyebrow">AI-POWERED CAREER ANALYSIS</span>
+
+            <h1>AI Career Copilot</h1>
+
+            <p>
+                Analyze your resume, identify skill gaps,
+                and build a personalized career roadmap.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         ANALYSIS FORM
+    ========================== -->
+
+    <div class="analysis-card">
+
+        <h2>Analyze Your Resume</h2>
+
+        <p class="card-description">
+            Enter your target role and either paste your resume
+            or upload a PDF/DOCX file.
+        </p>
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="career-form"
+        >
+
+            <div class="form-group">
+
+                <label for="role">
+                    Target Job Role
+                </label>
+
+                <input
+                    type="text"
+                    id="role"
+                    name="role"
+                    placeholder="Example: Data Analyst"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="resume">
+                    Paste Resume
+                </label>
+
+                <textarea
+                    id="resume"
+                    name="resume"
+                    rows="12"
+                    placeholder="Paste your resume text here..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="upload-section">
+
+                <label for="file">
+                    Or Upload Resume
+                </label>
+
+                <input
+                    type="file"
+                    id="file"
+                    name="file"
+                    accept=".pdf,.docx"
+                >
+
+                <small>
+                    Supported formats: PDF and DOCX
+                </small>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="analyze-button"
+            >
+                Analyze Resume with AI
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- =========================
+         AI RESULT
+    ========================== -->
+
+    {% if result %}
+
+        <div class="results-section">
+
+            <div class="results-header">
+
+                <span class="eyebrow">
+                    AI ANALYSIS COMPLETE
+                </span>
+
+                <h2>Your Career Analysis</h2>
+
+                <p>
+                    Here's how your resume currently matches
+                    your target career.
+                </p>
+
+            </div>
+
+
+            {% if result.error %}
+
+                <!-- ERROR -->
+
+                <div class="error-card">
+
+                    <div class="error-icon">
+                        !
+                    </div>
+
+                    <div>
+                        <h3>Analysis Error</h3>
+
+                        <p>
+                            {{ result.error }}
+                        </p>
+                    </div>
+
+                </div>
+
+
+            {% else %}
+
+                <!-- =========================
+                     AI ANALYSIS
+                ========================== -->
+
+                <div class="ai-result-card">
+
+                    <div class="ai-result-header">
+
+                        <div class="ai-icon">
+                            AI
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Career Assessment
+                            </h3>
+
+                            <span>
+                                Powered by Gemini
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="analysis-content">
+
+                        <pre>{{ result.analysis }}</pre>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     NEXT STEPS
+                ========================== -->
+
+                <div class="next-steps-card">
+
+                    <h3>
+                        What to do next
+                    </h3>
+
+                    <div class="steps-grid">
+
+                        <div class="step">
+
+                            <div class="step-number">
+                                01
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Review your skill gaps
+                                </strong>
+
+                                <p>
+                                    Focus on the skills identified
+                                    by the AI as missing or weak.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <div class="step-number">
+                                02
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Follow your roadmap
+                                </strong>
+
+                                <p>
+                                    Build the missing skills through
+                                    focused learning and practice.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <div class="step-number">
+                                03
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Improve your resume
+                                </strong>
+
+                                <p>
+                                    Apply the AI recommendations to
+                                    make your resume more relevant.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

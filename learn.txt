@@ -1,0 +1,7 @@
+venv
+
+all projects same packages
+
+pip install flask 
+sqlalchemy database handling 
+pymsql openai PyPDF2 python-docx 
